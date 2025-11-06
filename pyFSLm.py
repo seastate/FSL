@@ -10,6 +10,7 @@ from fipy import FaceVariable, PeriodicGrid1D, DiffusionTerm, ExponentialConvect
 from fipy import DefaultAsymmetricSolver, Viewer
 from fipy.tools.numerix import cos,pi
 from fipy.tools import numerix
+from IPython.display import clear_output, display
 import matplotlib.pyplot as plt
 plt.ion()
 
@@ -127,7 +128,7 @@ class FSL1Dsim():
     """A class to faciliate executing simulations of Frost-Strathmann-Lessard (FSL) consumer-resource
        dynamics in spatially and temporally heterogeneous 1D landscapes.
     """
-    def __init__(self,pars=None,input_file=None,num_method=2,figsize=(12,9),verbose=False):
+    def __init__(self,pars=None,input_file=None,num_method=2,figsize=(12,9),verbose=False,plot_mode='term'):
         """Create an FSLsim instance. If the FSLpars instance (pars) is provided, its parameters
            are used to initialize the simulation. If not, and if input_file is provided, it is
            parsed to obtain pars, which is subsequently used for initialization.
@@ -141,8 +142,14 @@ class FSL1Dsim():
         elif input_file:
             self.input_file = input_file
             self.pars = FSLpars(input_file=input_file)
-        # Create a graphics window and add axes for separate plots
+        modes = ['term','ipynb']
+        if plot_mode in modes:
+            self.plot_mode = plot_mode
+        else:
+            print(f'Unknown plot_mode! Currently supported modes are {modes}')
+       # Create a graphics window and add axes for separate plots
         self.Ffig = plt.figure(figsize=(12,9))
+        self.Ffig.tight_layout()
         # set up a list of default colors for multiple consumers variants
         self.colors = ['b','c','gray']
       
@@ -262,8 +269,24 @@ class FSL1Dsim():
         self.ax2.set_ylim(0,8)
         #
         self.Ffig.suptitle(f'file: {self.pars.filename}   Time: {self.t:.2f}   endTime: {self.pars.endTime:.2f}')
-        plt.pause(0.05)
-        self.Ffig.canvas.draw()                 # redraw the canvas
+        #plt.pause(0.05)
+        #self.Ffig.canvas.draw()                 # redraw the canvas
+
+        # this sometimes fails if the plots are empty
+        try:
+            self.Ffig.tight_layout()
+        except:
+            pass
+        if self.plot_mode == 'term':
+            plt.draw()
+            plt.pause(0.05)
+            self.Ffig.canvas.draw()
+            self.Ffig.canvas.flush_events()
+        elif self.plot_mode == 'ipynb': # plot mode for Jupyter notebooks
+            display(self.Ffig)
+            clear_output(wait=True)
+
+        
         
     def run(self):
         """Execute a simulation using current parameters.
@@ -338,11 +361,13 @@ class FSL1Dsim():
             #  Terminate run if abort flag is set
             if self.halt:
                 break
-            
+        # wrap up files and status flags
         self.completed = True
         self.pars.src_file.close()  # Close the source file
         self.out_file.close()  # Close the output file
         # Output run time statistics
         runtime()
+        # insure final state is plotted
+        self.plot()
 
 
