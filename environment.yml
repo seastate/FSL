@@ -27,11 +27,11 @@ dependencies:
   - brotli-python=1.1.0=py313h7033f15_4
   - bzip2=1.0.8=hda65f42_8
   - c-ares=1.34.5=hb9d3cd8_0
-  - ca-certificates=2025.8.3=hbd8a1cb_0
+  - ca-certificates=2025.10.5=hbd8a1cb_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - cairo=1.18.4=h3394656_0
-  - certifi=2025.8.3=pyhd8ed1ab_0
+  - certifi=2025.10.5=pyhd8ed1ab_0
   - cffi=2.0.0=py313hf01b4d8_0
   - charset-normalizer=3.4.3=pyhd8ed1ab_0
   - click=8.3.0=pyh707e725_0
@@ -91,9 +91,12 @@ dependencies:
   - imath=3.2.1=hde8ca8f_0
   - importlib-metadata=8.7.0=pyhe01879c_1
   - importlib_resources=6.5.2=pyhd8ed1ab_0
+  - ipyfilechooser=0.6.0=pyhd8ed1ab_0
   - ipykernel=6.30.1=pyh82676e8_0
-  - ipython=9.6.0=pyhfa0c392_0
+  - ipympl=0.9.8=pyhcf101f3_0
+  - ipython=9.7.0=pyh53cf698_0
   - ipython_pygments_lexers=1.1.1=pyhd8ed1ab_0
+  - ipywidgets=8.1.8=pyhd8ed1ab_0
   - isoduration=20.11.0=pyhd8ed1ab_1
   - jasper=4.2.8=he3c4edf_0
   - jedi=0.19.2=pyhd8ed1ab_1
@@ -113,6 +116,7 @@ dependencies:
   - jupyterlab=4.4.9=pyhd8ed1ab_0
   - jupyterlab_pygments=0.3.0=pyhd8ed1ab_2
   - jupyterlab_server=2.27.3=pyhd8ed1ab_1
+  - jupyterlab_widgets=3.0.16=pyhcf101f3_1
   - jxrlib=1.1=hd590300_3
   - keyutils=1.6.3=hb9d3cd8_0
   - kiwisolver=1.4.9=py313hc8edb43_1
@@ -248,7 +252,7 @@ dependencies:
   - openexr=3.3.5=h608838b_1
   - openjpeg=2.5.4=h55fea9a_0
   - openldap=2.6.10=he970967_0
-  - openssl=3.5.3=h26f9b46_1
+  - openssl=3.5.4=h26f9b46_0
   - overrides=7.7.0=pyhd8ed1ab_1
   - packaging=25.0=pyh29332c3_1
   - pandocfilters=1.5.0=pyhd8ed1ab_0
@@ -346,6 +350,7 @@ dependencies:
   - webcolors=24.11.1=pyhd8ed1ab_0
   - webencodings=0.5.1=pyhd8ed1ab_3
   - websocket-client=1.8.0=pyhd8ed1ab_1
+  - widgetsnbextension=4.0.15=pyhd8ed1ab_0
   - wslink=2.4.0=pyhd8ed1ab_0
   - xcb-util=0.4.1=h4f16b4b_2
   - xcb-util-cursor=0.1.5=hb9d3cd8_0
