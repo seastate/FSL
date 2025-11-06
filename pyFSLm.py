@@ -201,8 +201,8 @@ class FSL1Dsim():
         self.meanZZ = [[] for m in range(self.M)]
         self.meanRZ = [[] for m in range(self.M)]
 
-        self.tmp_output_file = self.pars.directory+'/'+'py3fsl.ser'
-        self.out_file = open(self.tmp_output_file,"w")
+        #self.tmp_output_file = self.pars.directory+'/'+'py3fsl.ser'
+        #self.out_file = open(self.tmp_output_file,"w")
     
     def stats(self):
         """A method to streamline graphical output.
@@ -364,7 +364,7 @@ class FSL1Dsim():
         # wrap up files and status flags
         self.completed = True
         self.pars.src_file.close()  # Close the source file
-        self.out_file.close()  # Close the output file
+        #self.out_file.close()  # Close the output file
         # Output run time statistics
         runtime()
         # insure final state is plotted

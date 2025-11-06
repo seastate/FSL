@@ -107,10 +107,8 @@ class FSLpars():
         self.phyto4 = float( splt_line8[3] )
         self.phyto5 = float( splt_line8[4] )
         self.Damb = float( splt_line8[5] )
-        self.rho_plot_flag = float( splt_line8[6] )
-        print("phyto1,phyto2,phyto3,phyto4,phyto5,Damb,rho_plot_flag = ",
-              self.phyto1,self.phyto2,self.phyto3,self.phyto4,self.phyto5,self.Damb,self.rho_plot_flag)
-
+        print("phyto1,phyto2,phyto3,phyto4,phyto5,Damb = ",
+              self.phyto1,self.phyto2,self.phyto3,self.phyto4,self.phyto5,self.Damb)
         self.inp_file.close  # Close the input file
 
     def load_source(self,init=False,verbose=False):
