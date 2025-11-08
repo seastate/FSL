@@ -357,7 +357,7 @@ class FSL1Dsim():
             if self.t >= self.time_plot:
                 self.plot()
             if self.t >= self.pars.t_src_next/self.pars.phyto2:
-                self.pars.load_source(verbose=True)
+                self.pars.load_source(verbose=self.verbose)
             #  Terminate run if abort flag is set
             if self.halt:
                 break
@@ -366,7 +366,7 @@ class FSL1Dsim():
         self.pars.src_file.close()  # Close the source file
         #self.out_file.close()  # Close the output file
         # Output run time statistics
-        runtime()
+        process_time,wall_time = runtime(verbose=self.verbose)
         # insure final state is plotted
         self.plot()
 

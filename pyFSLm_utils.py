@@ -3,7 +3,7 @@
 from time import process_time, time, sleep
 global process_time0, wall_time0
 
-def runtime(init=False):
+def runtime(init=False,verbose=False):
     """Function for timing runs
     """
     global process_time0, wall_time0
@@ -11,9 +11,14 @@ def runtime(init=False):
     if init:  # Record start time
         process_time0 = process_time()
         wall_time0 = time()
+        return process_time0,wall_time0
     else:  # Print run times
-        print(f'Simulation process time = {process_time()-process_time0} seconds')
-        print(f'Simulation wall time = {time()-wall_time0} seconds')
+        process_time1 = process_time()-process_time0
+        wall_time1 = time()-wall_time0
+        if verbose:
+            print(f'Simulation process time = {process_time1} seconds')
+            print(f'Simulation wall time = {wall_time1} seconds')
+        return process_time1,wall_time1
 
 class FSLpars():
     """A class to facilitate handling parameters for FSL simulations.
@@ -49,7 +54,7 @@ class FSLpars():
         self.source_file = splt_line3[0]
         print("Source file = ",self.source_file)
         self.src_file = open(self.source_file,"r")
-        self.load_source(init=True,verbose=True)
+        self.load_source(init=True,verbose=False)
         #  simulation parameters
         line5 = self.inp_file.readline()
         line5 = self.inp_file.readline()

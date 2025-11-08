@@ -269,20 +269,9 @@ class FSL2Dsim():
         self.ax.set_ylim(bottom=0.)
         self.ax.set_ylabel('Spatial averages')
         self.ax.set_xlabel('Time (Z - blue; R - green; R*Z - red)')
-        #
-        #self.ax2.cla()
-        #for v in self.viewers:
-        #self.multiviewer.plot()
-        #    v.plot()
-        #    plt.pause(0.25)
-        #self.viewerR.plot()
-        #self.linexr, = self.ax2.contourf(self.X[0],self.X[1],self.Res.R.value,color=self.Res.color)
-        #self.linexr, = self.ax2.plot(self.X[0],self.Res.R.value,color=self.Res.color)
-        #self.linesxz = [None for m in range(self.M)]
-        #for m in range(self.M):
-        #    self.linesxz[m], = self.ax2.plot(self.X[0],self.Cons[m].Z.value,color=self.Cons[m].color)
+        # Plot resource and consumer distributions
         for i,V in enumerate([self.Res.R]+[self.Cons[m].Z for m in range(self.M)]):
-            print(i)
+            #print(i)
             plt.subplot(2,self.M+1,i+1)
             plt.cla()
             vax = plt.gca()
@@ -290,8 +279,15 @@ class FSL2Dsim():
             plt.pause(0.1)
             vax.set_xlabel('Position, x')
             vax.set_ylabel('Position, y')
-            vax.set_title(f'i = {i}')
-                             
+            if i == 0:
+                vax.set_title(f'Resource')
+            else:
+                vax.set_title(f'Consumer{i-0}')
+            vax.set_xlim(0,self.pars.Lx)
+            vax.set_ylim(0,self.pars.Ly)
+            vax.set_zlim(0,8)
+        #self.ax2.set_ylim(0,8)
+            
                              
         #self.ax2.relim()            # reset axes limits
         #self.ax2.autoscale_view()   # rescale axes
