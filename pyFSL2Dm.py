@@ -7,7 +7,7 @@
 #from fipy import *
 from fipy import TransientTerm,ImplicitDiffusionTerm,ExplicitDiffusionTerm,CellVariable
 from fipy import FaceVariable, PeriodicGrid2D, DiffusionTerm, ExponentialConvectionTerm
-from fipy import DefaultAsymmetricSolver, Viewer, multiViewer
+from fipy import DefaultAsymmetricSolver#, Viewer, multiViewer
 from fipy.tools.numerix import cos,pi
 from fipy.tools import numerix
 from IPython.display import clear_output, display
@@ -150,7 +150,7 @@ class FSL2Dsim():
             print(f'Unknown plot_mode! Currently supported modes are {modes}')
        # Create a graphics window and add axes for separate plots
         self.Ffig = plt.figure(figsize=(12,9))
-        self.Ffig.tight_layout()
+        #self.Ffig.tight_layout()
         # set up a list of default colors for multiple consumers variants
         self.colors = ['b','c','gray']
       
@@ -194,11 +194,6 @@ class FSL2Dsim():
         for m,C in enumerate(self.Cons):
             C.color=self.colors[m]
             C.setpars(m=m,pars=self.pars,init=True)
-        #self.viewers = []#[Viewer(vars=self.Res.R)]
-        #for m in range(self.M):
-        #    self.viewers += [Viewer(vars=self.Cons[m].Z)]
-        #self.multiviewer = multiViewer.MultiViewer(self.viewers)
-        #self.viewerR = Viewer(vars=[self.Res.R]+[self.Cons[m].Z for m in range(self.M)])
         # Some cellvariables to use in calculating rates and statistics
         self.rrr = CellVariable(name="tempr", 
                            mesh=self.mesh,
@@ -274,9 +269,10 @@ class FSL2Dsim():
             #print(i)
             plt.subplot(2,self.M+1,i+1)
             plt.cla()
+            #plt.pause(0.5)
             vax = plt.gca()
             vax.plot_surface(self.X[0].reshape([128,128]),self.X[1].reshape([128,128]),V.value.reshape([128,128]), cmap='viridis')
-            plt.pause(0.1)
+            #plt.pause(0.5)
             vax.set_xlabel('Position, x')
             vax.set_ylabel('Position, y')
             if i == 0:
@@ -286,6 +282,7 @@ class FSL2Dsim():
             vax.set_xlim(0,self.pars.Lx)
             vax.set_ylim(0,self.pars.Ly)
             vax.set_zlim(0,8)
+            #plt.pause(0.1)
         #self.ax2.set_ylim(0,8)
             
                              
@@ -305,7 +302,7 @@ class FSL2Dsim():
 
         # this sometimes fails if the plots are empty
         try:
-            self.Ffig.tight_layout()
+            pass #self.Ffig.tight_layout()
         except:
             pass
         if self.plot_mode == 'term':
@@ -394,7 +391,8 @@ class FSL2Dsim():
             if self.t >= self.time_plot:
                 self.plot()
             if self.t >= self.pars.t_src_next/self.pars.phyto2:
-                self.pars.load_source(verbose=True)
+                self.pars.load_source(verbose=False)
+                #self.pars.load_source(verbose=True)
             #  Terminate run if abort flag is set
             if self.halt:
                 break
